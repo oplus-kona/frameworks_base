@@ -111,4 +111,7 @@ public interface DeviceIdleInternal {
      */
     @TempAllowListType int getTempAllowListType(@ReasonCode int reasonCode,
             @TempAllowListType int defaultType);
+
+    boolean forceDeepIdle(boolean enable);
+    boolean isDeepIdle();
 }

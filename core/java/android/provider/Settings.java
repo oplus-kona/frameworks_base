@@ -15798,6 +15798,39 @@ public final class Settings {
          */
         public static final String SLEEP_MODE_RINGER_MODE = "sleep_mode_ringer_mode";
 
+        /** @hide */
+        public static final String DEEP_DOZE_ENABLED = "deep_doze_enabled";
+
+        /** @hide */
+        public static final String DEEP_DOZE_IS_ACTIVE = "deep_doze_is_active";
+
+        /** @hide */
+        public static final String DEEP_DOZE_START_TIME = "deep_doze_start_time";
+
+        /** @hide */
+        public static final String DEEP_DOZE_END_TIME = "deep_doze_end_time";
+
+        /** @hide */
+        public static final String DEEP_DOZE_ENTRY_DURATION_MS = "deep_doze_entry_duration_ms";
+
+        /** @hide */
+        public static final String DEEP_DOZE_START_BATTERY = "deep_doze_start_battery";
+
+        /** @hide */
+        public static final String DEEP_DOZE_END_BATTERY = "deep_doze_end_battery";
+
+        /** @hide */
+        public static final String DEEP_DOZE_DISTURBANCE_LOG = "deep_doze_disturbance_log";
+
+        /** @hide */
+        public static final String DEEP_DOZE_PRE_ALARM_WARMING = "deep_doze_pre_alarm_warming";
+
+        /** @hide */
+        public static final String DEEP_DOZE_REPEAT_CALLERS = "deep_doze_repeat_callers";
+
+        /** @hide */
+        public static final String DEEP_DOZE_SCHEDULE_MODE = "deep_doze_schedule_mode";
+
         /**
          * These entries are considered common between the personal and the managed profile,
          * since the managed profile doesn't get to change them.

@@ -2435,6 +2435,37 @@ public class DeviceIdleController extends SystemService
                 @TempAllowListType int defaultType) {
             return DeviceIdleController.this.getTempAllowListType(reasonCode, defaultType);
         }
+
+        @Override
+        public boolean forceDeepIdle(boolean enable) {
+            synchronized (DeviceIdleController.this) {
+                if (enable) {
+                    if (!mDeepEnabled) return false;
+                    mForceIdle = true;
+                    becomeInactiveIfAppropriateLocked();
+                    int curState = mState;
+                    while (curState != STATE_IDLE) {
+                        stepIdleStateLocked("s:deep_doze");
+                        if (curState == mState) {
+                            exitForceIdleLocked();
+                            return false;
+                        }
+                        curState = mState;
+                    }
+                    return true;
+                } else {
+                    exitForceIdleLocked();
+                    return true;
+                }
+            }
+        }
+
+        @Override
+        public boolean isDeepIdle() {
+            synchronized (DeviceIdleController.this) {
+                return mState == STATE_IDLE;
+            }
+        }
     }
 
     private class LocalPowerAllowlistService implements PowerAllowlistInternal {

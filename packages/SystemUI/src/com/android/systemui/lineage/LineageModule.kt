@@ -32,6 +32,7 @@ import com.android.systemui.qs.tiles.FPSInfoTile
 import com.android.systemui.qs.tiles.HeadsUpTile
 import com.android.systemui.qs.tiles.LocaleTile
 import com.android.systemui.qs.tiles.OnTheGoTile
+import com.android.systemui.qs.tiles.DeepDozeTile
 import com.android.systemui.qs.tiles.PowerShareTile
 import com.android.systemui.qs.tiles.PreferredNetworkTile
 import com.android.systemui.qs.tiles.ProfilesTile
@@ -166,6 +167,11 @@ interface LineageModule {
     @IntoMap
     @StringKey(ScreenshotTile.TILE_SPEC)
     fun bindScreenshotTile(screenshotTile: ScreenshotTile): QSTileImpl<*>
+
+    @Binds
+    @IntoMap
+    @StringKey(DeepDozeTile.TILE_SPEC)
+    fun bindDeepDozeTile(deepDozeTile: DeepDozeTile): QSTileImpl<*>
 
     /** Inject SleepModeTile into tileMap in QSModule */
     @Binds  
@@ -484,6 +490,21 @@ interface LineageModule {
                     QSTileUIConfig.Resource(
                         iconRes = com.android.internal.R.drawable.ic_screenshot,
                         labelRes = com.android.internal.R.string.global_action_screenshot
+                    ),
+                instanceId = uiEventLogger.getNewInstanceId(),
+                category = TileCategory.UTILITIES,
+            )
+
+        @Provides
+        @IntoMap
+        @StringKey(DeepDozeTile.TILE_SPEC)
+        fun provideDeepDozeTileConfig(uiEventLogger: QsEventLogger): QSTileConfig =
+            QSTileConfig(
+                tileSpec = TileSpec.create(DeepDozeTile.TILE_SPEC),
+                uiConfig =
+                    QSTileUIConfig.Resource(
+                        iconRes = R.drawable.ic_sleep,
+                        labelRes = R.string.quick_settings_deep_doze_label
                     ),
                 instanceId = uiEventLogger.getNewInstanceId(),
                 category = TileCategory.UTILITIES,

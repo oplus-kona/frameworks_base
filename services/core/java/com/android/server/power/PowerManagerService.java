@@ -2189,6 +2189,14 @@ public final class PowerManagerService extends SystemService
                     wakeLock.mOwnerUid, wakeLock.mOwnerPid, wakeLock.mWorkSource,
                     wakeLock.mHistoryTag, wakeLock.mCallback);
             restartNofifyLongTimerLocked(wakeLock);
+            DeepDozeService deepDoze = com.android.server.LocalServices.getService(DeepDozeService.class);
+            if (deepDoze != null && deepDoze.isDeepDozeActive()) {
+                if (deepDoze.onWakeLockAcquired(wakeLock.mPackageName, wakeLock.mOwnerUid, wakeLock.mTag)) {
+                    wakeLock.setDisabled(true);
+                    mDirty |= DIRTY_WAKE_LOCKS;
+                    updatePowerStateLocked();
+                }
+            }
         }
     }
 

@@ -245,6 +245,7 @@ import com.android.server.policy.PermissionPolicyService;
 import com.android.server.policy.PhoneWindowManager;
 import com.android.server.policy.role.RoleServicePlatformHelperImpl;
 import com.android.server.power.PowerManagerService;
+import com.android.server.power.DeepDozeService;
 import com.android.server.power.ShutdownThread;
 import com.android.server.power.SleepModeService;
 import com.android.server.power.hint.HintManagerService;
@@ -3412,6 +3413,10 @@ public final class SystemServer implements Dumpable {
 
         t.traceBegin("SleepModeService");
         mSystemServiceManager.startService(SleepModeService.class.getName());
+        t.traceEnd();
+
+        t.traceBegin("DeepDozeService");
+        mSystemServiceManager.startService(DeepDozeService.class.getName());
         t.traceEnd();
 
         t.traceBegin("HealthConnectManagerService");
